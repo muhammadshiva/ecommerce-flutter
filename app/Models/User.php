@@ -26,6 +26,9 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'username',
+        'phone_number',
+        'roles',
         'password',
     ];
 
@@ -58,4 +61,11 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    // Table relation user to transaction
+    public function transactions()
+    {
+        // One to many (Model, foreign key, primary key)       
+        return $this->hasMany(Transaction::class, 'users_id', 'id');
+    }
 }
